@@ -29,7 +29,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable} ${inter.variable} bg-black `}>
-        {children}
+        <div className="w-full h-full flex justify-center items-center relative bg-black">
+          <div className="max-w-screen-xl w-full h-full flex relative">
+            <Menu />
+            {children}
+            <RightSideContent />
+          </div>
+        </div>{" "}
       </body>
     </html>
   );
