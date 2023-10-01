@@ -74,7 +74,7 @@ export const Menu = () => {
           Post
         </Button>
       </div>{" "}
-      <div className="mb-10 rounded-full cursor-pointer gap-4 p-4 pr-24 py-2 items-center flex flex-row hover:bg-slate-800">
+      <div className="mb-10 transition duration-200 rounded-full cursor-pointer gap-4 p-4 pr-24 py-2 items-center flex flex-row hover:bg-slate-800">
         {" "}
         <div className="w-9 h-9  bg-slate-600 rounded-full flex-none"></div>
         <div className="flex flex-col">

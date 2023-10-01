@@ -1,8 +1,24 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Posts from "./Posts";
+import { useRouter } from "next/router";
 
 const ContentArea = () => {
+  const [content, setContent] = useState("Your Teams");
+  const yourTeamsRef = useRef<HTMLDivElement | null>(null);
+  const followingRef = useRef<HTMLDivElement | null>(null);
+
+  const handleContent = (selectedContent: any) => {
+    setContent(selectedContent);
+  };
+
+  const handleRefresh = () => {
+    const router = useRouter();
+
+    router.reload();
+  };
   return (
     <main className="ml-[275px] font-secondary  flex w-[600px] text-white h-full min-h-screen flex-col border-l-[0.5px] border-r-[0.5px] border-slate-600">
       {" "}
@@ -10,10 +26,24 @@ const ContentArea = () => {
         {" "}
         <h1 className="text-xl   font-bold p-5 "> Home</h1>
         <div className="grid grid-cols-2  grid-rows-1 h-full ">
-          <Button className="h-full rounded-none bg-transparent transition duration-200 font-medium hover:bg-white/10 text-sm ">
+          <Button
+            onClick={() => handleContent("Your Teams")}
+            className={`h-full rounded-none bg-transparent transition duration-200 font-medium hover:bg-white/10 text-sm ${
+              content === "Your Teams"
+                ? "border-blue-500  border-b-[5px] decoration-blue-500"
+                : ""
+            }`}
+          >
             Your Teams
           </Button>
-          <Button className="h-full  rounded-none bg-transparent transition duration-200 font-medium hover:bg-white/10 text-sm ">
+          <Button
+            onClick={() => handleContent("Following")}
+            className={`h-full rounded-none bg-transparent transition duration-200 font-medium hover:bg-white/10 text-sm ${
+              content === "Following"
+                ? "border-blue-500  border-b-[5px] decoration-blue-500  "
+                : ""
+            }`}
+          >
             Following
           </Button>
         </div>
@@ -40,12 +70,18 @@ const ContentArea = () => {
           </div>
         </div>
       </div>
-      <Posts />
-      <Posts />
-      <Posts />
-      <Posts />
-      <Posts />
-      <Posts />
+      {content === "Your Teams" && (
+        <div ref={yourTeamsRef}>
+          {" "}
+          <Posts />
+          <Posts />
+          <Posts />
+          <Posts />
+          <Posts />
+          <Posts />
+        </div>
+      )}
+      {content === "Following" && <div ref={followingRef}></div>}
     </main>
   );
 };
